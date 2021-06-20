@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        .wrap{
+            width: 800px;
+            margin: 50px auto;
+            border: 2px solid #666;
+        }
+        .leader{
+            width: 100%;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .leader > span {
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 2px solid #666;
+        } 
+        .cont div{
+            font-size: 2em;
+            text-align: center;
+            width: 800px;
+            height: 400px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: none;
+        }
+        .active{
+            background-color: yellow;
+        }
+        div .block{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="leader">
+           <span class="active">我</span><span>好</span><span>爱</span><span>你</span>
+        </div>
+        <div class="cont">
+            <div class="block">这是天空</div>
+            <div>这是码头</div>
+            <div>这是基地</div>
+            <div>这是街头</div>
+        </div>
+    </div>
+    <script>
+        window.onload=function(){
+            var leader=document.getElementsByClassName("leader");
+            var spans=leader[0].getElementsByTagName("span");
+            var cont=document.getElementsByClassName("cont");
+            var divs=cont[0].getElementsByTagName("div");
+            for(var i=0;i<divs.length;i++){
+                divs[i].style.backgroundImage='url(./Tab-images/'+(i+1)+'.jpg)';
+            }
+            for(var i=0;i<spans.length;i++){
+                spans[i].index=i;
+                spans[i].onmouseover=function(){
+                    for(var i=0;i<spans.length;i++){
+                        spans[i].className=" ";
+                        divs[i].className=" ";
+                    }
+                    console.log(this.index);
+                    this.className="active";
+                    divs[this.index].className="block";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

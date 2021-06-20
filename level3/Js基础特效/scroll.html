@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            font-family: sans-serif;
+            letter-spacing: 2px;
+        }
+        .container{
+            width:500px;
+            margin: 100px auto;
+            height: 200px;
+            border: 8px solid #c9c5c5f5;
+            border-radius: 10px;
+        }
+        .top{
+            position: relative;
+            width: 500px;
+            height: 80px;
+            background: rgb(199, 79, 79) no-repeat 100%;
+            border-radius: 5px;
+        }
+        .top > .title{
+            position: absolute;
+            height: 50px;
+            width: 300px;
+            margin-left:-150px;
+            margin-top: -25px;
+            top: 50%;
+            left: 50%;
+            text-align: center;
+            line-height: 18.72px;
+        }
+        .more{
+            position: absolute;
+            bottom: 0px;
+            right: 0%;
+        }
+        li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            text-indent: 2em;
+            display: block;
+        }
+        .layout{
+            overflow: hidden;
+            width: 500px;
+            height: 100px;
+            background: rgb(252, 250, 250) no-repeat 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <h3 class=title>欢迎来到js滚动特效</h3>
+            <span class="more">更多</span>
+        </div>
+        <div class="layout">
+            <ul class="icon1">
+                <li class="odd"><a href="#">1.html+css基础课程</a></li>
+                <li class="even"><a href="#">2.js入门课程</a></li>
+                <li class="odd"><a href="#">3.js入土课程</a></li>
+                <li class="even"><a href="#">4.js入土课程</a></li>
+                <li class="odd"><a href="#">5.html+css进阶课程</a></li>
+                <li class="even"><a href="#">6.精灵图使用案例</a></li>
+                <li class="odd"><a href="#">7.关于margin外边距合并问题</a></li>
+                <li class="even"><a href="#">8.关于制作js的特效</a></li>
+                <li class="odd"><a href="#">9.立即执行函数</a></li>
+                <li class="even"><a href="#">10.e.target和this的使用</a></li>
+            </ul>
+            <ul class="icon2"></ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var icon1=document.getElementsByClassName("icon1")[0];
+        var icon2=document.getElementsByClassName("icon2")[0];
+        var layout=document.getElementsByClassName("layout")[0];
+        icon2.innerHTML=icon1.innerHTML;
+        layout.scrollTop=0;
+        var speed=50;
+        function scrollup(){
+            if(layout.scrollTop>=icon1.scrollHeight){
+                layout.scrollTop=0;
+            }
+            else{
+                layout.scrollTop++;
+            }
+        }
+        var myScroll=setInterval("scrollup()",speed);
+
+        layout.onmouseover = function(){
+            clearInterval(myScroll);
+        }
+        
+        layout.onmouseout = function(){
+            myScroll=setInterval("scrollup()",speed);
+        }
+    </script>
+</body>
+</html>

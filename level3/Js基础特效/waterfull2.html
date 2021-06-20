@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0%;
+            margin: 0;
+            position: relative;
+        }
+        img{
+            width: 220px;
+            display: block;
+        }
+        .item{
+            box-shadow:2px 2px 2px #999;
+            position: absolute;
+        }
+        #box{
+            width:1350px ;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+        <div class="item"><img src="" alt=""></div>
+    </div>
+    <script>
+        var gap=10;
+        var box=document.getElementById("box");
+        var items=box.children;
+        for(var i=0;i<30;i++){
+            items[i].children[0].src="./waterFall/"+(i+1)+".jpg";
+        }
+        window.onload=function(){
+            waterfall();
+            function waterfall(){
+                var pageWidth=getClient().width;
+                var itemWidth=items[0].offsetWidth;
+                var columns=parseInt(pageWidth/(itemWidth+gap));
+                var arr=[];
+                for(var i=0;i<items.length;i++){
+                    if(i<columns){
+                    items[i].style.top=0;
+                    items[i].style.left=i*(itemWidth+gap)+'px';
+                    arr.push(items[i].offsetHeight);
+                    }else{
+                        var minHeight=arr[0];
+                        var index=0;
+                        for(var j=0;j<arr.length;j++){
+                            if(minHeight>arr[j]){
+                                minHeight=arr[j];
+                                index=j;
+                            }
+                        }
+                        //设置项目的位置信息
+                        items[i].style.top=arr[index]+gap+"px";
+                        items[i].style.left=items[index].offsetLeft+"px";
+                        //增加每列的高度
+                        arr[index]=arr[index]+items[i].offsetHeight+gap;
+                    }
+                }
+            }
+        
+            window.onresize=function(){
+                waterfall();
+            };
+            window.onscroll=function(){
+                if(getClient().height+getScrollTop()>=items[items.length-1].offsetTop){
+                    var datas=[
+                        "./waterFall/1.jpg",
+                        "./waterFall/2.jpg",
+                        "./waterFall/3.jpg",
+                        "./waterFall/4.jpg",
+                        "./waterFall/5.jpg",
+                        "./waterFall/6.jpg",
+                        "./waterFall/7.jpg",
+                        "./waterFall/8.jpg",
+                        "./waterFall/9.jpg",
+                        "./waterFall/10.jpg",
+                        "./waterFall/11.jpg",
+                        "./waterFall/12.jpg",
+                        "./waterFall/13.jpg",
+                        "./waterFall/14.jpg",
+                        "./waterFall/15.jpg",
+                        "./waterFall/16.jpg",
+                        "./waterFall/17.jpg",
+                        "./waterFall/18.jpg",
+                        "./waterFall/19.jpg",
+                        "./waterFall/20.jpg",
+                        "./waterFall/21.jpg",
+                        "./waterFall/22.jpg",
+                        "./waterFall/23.jpg",
+                        "./waterFall/24.jpg",
+                        "./waterFall/25.jpg",
+                        "./waterFall/26.jpg",
+                        "./waterFall/27.jpg",
+                        "./waterFall/28.jpg",
+                        "./waterFall/29.jpg",
+                        "./waterFall/30.jpg"
+                    ];
+                    for(var i=0;i<datas.length;i++){
+                        var div=document.createElement("div");
+                        div.className="item";
+                        div.innHTML='<img src="'+datas[i]+'"alt="">';
+                        box.appendChild(div);
+                    }
+                    waterfall();
+                }
+            };
+        function getClient(){
+            return{
+                width:window.innerWidth||document.documentElement.clientWidth||documnet.body.clientWidth,
+                height: window.innerHeight||document.documentElement.clientHeight||documnet.body.clientHeight,
+            }//主要区分IE5，6，7，8
+        }
+        function getScrollTop(){
+            return window.pageYOffset || document.documentElement.srcollTop;//除了IE9或更早版本||IE9及更早版本
+        }
+    }
+    </script>
+</body>
+</html>
